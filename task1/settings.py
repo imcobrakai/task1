@@ -93,7 +93,7 @@ if DEBUG == True:
     }
 else:
     DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-    DATABASES['default'] = dj_database_url.config(default='postgres://lbijandnbnnwyc:c641181c294135e4c89dc06ee94f0ae8604c2a1c20f7fa3e967d18ef28af79f8@ec2-3-223-242-224.compute-1.amazonaws.com:5432/dda84pgjmm4uu8')
+    DATABASES['default'] = dj_database_url.config(default=os.getenv("POSTGRES_URL"))
 
 
 # Password validation
