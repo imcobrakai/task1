@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+  
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+  
+                  <form class="mx-1 mx-md-4" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.first_name }}
+                        {{ form.errors.first_name }}
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.last_name }}
+                        {{ form.errors.last_name }}
+                      </div>
+                    </div>
+                    
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.profile_pic }}
+                        {{ form.errors.profile_pic }}
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.username }}
+                        {{ form.errors.username }}
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.email }}
+                        {{ form.errors.email }}
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.password1 }}
+                        {{ form.errors.password1 }}
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        {{ form.password2 }}
+                        {{ form.errors.password2 }}
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            {{ form.address1 }}
+                            {{ form.errors.address1 }}
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            {{ form.city }}
+                            {{ form.errors.city }}
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            {{ form.state }}
+                            {{ form.errors.state }}
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            {{ form.pincode }}
+                            {{ form.errors.pincode }}
+                        </div>
+                    </div>
+                    <input type="hidden" name="is_patient" value="1">
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <input type="submit" class="btn btn-primary btn-lg" value="Register"></input>
+                    </div>
+                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{% url 'accounts:login' %}"
+                        class="fw-bold text-body"><u>Login here</u></a></p>
+                  </form>
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+  
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                    class="img-fluid" alt="Sample image">
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<script>
+    let inputs = document.querySelectorAll('input');
+    let select = document.querySelectorAll('select');
+    select[0].classList.add("form-select");
+    select[0].selectedIndex = 1;
+    for (let i = 1; i < inputs.length; i++) {
+        inputs[i].classList.add("form-control");
+    } 
+    inputs[1].placeholder = "First Name";
+    inputs[2].placeholder = "Last Name";
+    inputs[4].placeholder = "Username";
+    inputs[5].placeholder = "Email";
+    inputs[6].placeholder = "Password";
+    inputs[7].placeholder = "Confirm Password";
+    inputs[8].placeholder = "Address";
+    inputs[9].placeholder = "City";
+    inputs[10].placeholder = "Pincode";
+    inputs[1].focus();
+
+</script>
+{% endblock main %}

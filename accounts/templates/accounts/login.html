@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="text-center">
+
+    <h2 class="m-5">Login Page</h2>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" autofocus autocomplete="off" name="username">
+        </div>
+    <div class="mb-3">
+        <input type="password" name="password">
+    </div>
+    {% for key, value in form.errors.items %}
+    {{ value }}
+    {% endfor %}
+    <input type="hidden" name="next" value="{% url 'accounts:index' %}">
+    <button class="btn btn-primary text-center"d E type="submit">Log In</button>
+    <div class="text-center m-3">
+        <p>Not a member? Register as <a href="{% url 'accounts:register-doctor' %}">Doctor</a> or <a href="{% url 'accounts:register-patient' %}">Patient</a></p>
+      </div>
+</form>
+</div>
+<script>
+    inputs = document.getElementsByTagName("input");
+    for (let i = 1; i < inputs.length; i++) {
+        inputs[i].placeholder = inputs[i].name.charAt(0).toUpperCase() + inputs[i].name.substring(1);
+        inputs[i].classList.add("form-control")
+        inputs[i].classList.add("mx-auto")
+        inputs[i].classList.add("w-auto")
+    }
+</script>
+{% endblock main %}

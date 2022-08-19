@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block main %}
+<section style="background-color: #eee;" class="m-5">
+    <h3 class="text-center m-4">
+        {% if user.is_patient %}
+        Patient Details 
+        {% endif %}
+        {% if user.is_doctor %}
+        Doctor Detail
+        {% endif %}
+    </h3>
+      <div class="row  m-3">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="{{ user.profile_pic.url }}" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">
+                {% if user.is_doctor %}Dr.{% endif %}
+                {{ user.first_name|capfirst }} {{ user.last_name|capfirst }}
+            </h5>
+              <p class="text-muted mb-4">{{ user.city|capfirst }}, {{ user.state|capfirst }} - {{ user.pincode }}</p>
+            
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> 
+                    {% if user.is_doctor %}Dr.{% endif %}
+                    {{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.email }}</p>
+                </div>
+            </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Username</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.username }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Address</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.address1|capfirst }}, {{ user.city|capfirst }} - {{ user.pincode }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">State</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ state }}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center m-2">
+        <a href="{% url 'accounts:logout' %}?next={% url 'accounts:login' %}" class="btn btn-danger text-center">Logout</a>
+    </div>
+</section>
+{% endblock main %}
