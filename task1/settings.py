@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.getenv("DEBUG") == 1 else False
+DEBUG = True if os.getenv("DEBUG") == "1" else False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -83,7 +83,6 @@ WSGI_APPLICATION = 'task1.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {}
-
 if DEBUG == True:
     DATABASES = {
         'default': {
@@ -134,7 +133,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "static"
-
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
