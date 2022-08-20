@@ -2,6 +2,7 @@ venv/
 db.sqlite3
 task1/__pycache__
 accounts/__pycache__
+blog/__pycache__
 media/profile_pics
 .env
 static/
