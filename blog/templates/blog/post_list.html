@@ -16,16 +16,16 @@ Post List
             <div class="row">
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                     <div class="post-type post-img">
-                        <a href="#"><img src="{{ post.image.url }}" alt="image post"
+                        <a href="{% url 'blog:post-detail' post.id %}"><img src="{{ post.image.url }}" alt="image post"
                             class="img-fluid" style="width: 12rem;"></a>
                         </div>
                     </div>
                 <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
                     <div class="caption">
-                        <h3 class="md-heading"><a href="#">{{ post.title|capfirst }}</a></h3>
+                        <h3 class="md-heading"><a href="{% url 'blog:post-detail' post.id %}">{{ post.title|capfirst }}</a></h3>
                         <p style="font-size:1.2rem;">-- By <strong> Dr. {{ post.author.first_name|capfirst }} {{ post.author.last_name|capfirst }} </strong> </p>
                         <p style="font-size:1.5rem;">{{ post.summary|truncatewords:15|capfirst }}</p>
-                        <a class="" href="#" role="button" style="font-size:1.5rem;">Read More</a> </div>
+                        <a class="" href="{% url 'blog:post-detail' post.id %}" role="button" style="font-size:1.5rem;">Read More</a> </div>
                 </div>
             </div>
         </article>

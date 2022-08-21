@@ -5,6 +5,7 @@ My Posts
 {% endblock title %}
 
 {% block main %}
+{% if post_list %}
 <div class="container m-5">
     <div class="col-md-12 col-lg-12">
         {% for post in post_list %}
@@ -21,19 +22,22 @@ My Posts
                         <h2 class="md-heading"><a href="#">{{ post.title|capfirst }}</a></h2>
                         <p style="font-size:1.5rem;">{{ post.summary|truncatewords:15|capfirst }}</p>
                         <a class="" href="#" role="button" style="font-size:1.5rem;">Read More</a> </div>
+                    </div>
+                    {% if post.draft %}
+                    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                        <form action="{% url 'blog:publish-post' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ post.id }}">
+                            <button type="submit" class="btn btn-primary">Publish</button>
+                        </form>
+                    </div>
+                    {% endif %}
                 </div>
-                {% if post.draft %}
-                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-                    <form action="{% url 'blog:publish-post' %}" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{ post.id }}">
-                        <button type="submit" class="btn btn-primary">Publish</button>
-                    </form>
-                </div>
-                {% endif %}
-            </div>
-        </article>
-        {% endfor %}  
+            </article>
+            {% endfor %}  
+        </div>
     </div>
-</div>
+    {% else %}
+    <h2 class="text-center my-5">You Have Not Created Any Post. Please Create One!</h2>
+    {% endif %}
 {% endblock main %}

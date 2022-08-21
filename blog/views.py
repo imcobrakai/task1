@@ -2,7 +2,7 @@ from blog.forms import PostForm
 from blog.models import Post, Category
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, ListView
@@ -66,3 +66,14 @@ class Publish(LoginRequiredMixin, UserPassesTestMixin, View):
 
     def test_func(self):
         return self.request.user.is_doctor == True
+
+class PostDetail(LoginRequiredMixin, View):
+    def get(self, request, id):
+        post = get_object_or_404(Post, id=id)
+
+        if post.draft == True and post.author != request.user:
+            return redirect(reverse_lazy("blog:post-list"))
+        context = {
+            "post": post,
+        }
+        return render(request, "blog/post_detail.html", context)
