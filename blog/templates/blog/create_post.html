@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Post{% endblock title %}
+
+{% block main %}
+<h2 class="m-5 text-center">Create Post</h1>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.errors }}
+    <div class="form-outline mb-4">
+        {{ form.title }}
+        {{ form.errors.title }}
+    </div>
+  
+    <div class="form-outline mb-4">
+        {{ form.image }}
+        {{ form.errors.image }}
+    </div>
+    <div class="form-outline mb-4">
+        {{ form.category }}
+        {{ form.errors.category }}
+    </div>
+  
+    <div class="form-outline mb-4">
+      {{ form.content }}
+      {{ form.errors.content }}
+    </div>
+    <div class="form-outline mb-4">
+        {{ form.summary }}
+        {{ form.errors.summary }}
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mb-4" id="draft">Save as Draft</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Publish</button>
+  </form>
+
+<script>
+    let inputs = document.querySelectorAll('input');
+    let content = document.getElementById('id_content');
+    content.classList.add("form-control");
+    let category = document.getElementById('id_category');
+    category.classList.add("form-select");
+    for (let i = 1; i < inputs.length; i++) {
+        inputs[i].classList.add("form-control");
+    }
+
+    let form = document.querySelector('form');
+    let draft = document.getElementById('draft');
+    draft.onclick = function() {
+        let hidden = document.createElement("input");
+        hidden.type = "hidden";
+        hidden.value = "1";
+        hidden.name = "draft";
+        form.appendChild(hidden);
+        form.submit();
+    }
+</script>
+{% endblock main %}

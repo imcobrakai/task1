@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Post List
+{% endblock title %}
+
+{% block main %}
+
+{% if items %}
+<div class="container m-5">
+    <div class="col-md-12 col-lg-12">
+        {% for category, posts in items.items %}
+        <h2>{{ category.name }}</h2>
+        {% for post in posts %}
+        <article class="post vt-post my-5">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                    <div class="post-type post-img">
+                        <a href="#"><img src="{{ post.image.url }}" alt="image post"
+                            class="img-fluid" style="width: 12rem;"></a>
+                        </div>
+                    </div>
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                    <div class="caption">
+                        <h3 class="md-heading"><a href="#">{{ post.title|capfirst }}</a></h3>
+                        <p style="font-size:1.2rem;">-- By <strong> Dr. {{ post.author.first_name|capfirst }} {{ post.author.last_name|capfirst }} </strong> </p>
+                        <p style="font-size:1.5rem;">{{ post.summary|truncatewords:15|capfirst }}</p>
+                        <a class="" href="#" role="button" style="font-size:1.5rem;">Read More</a> </div>
+                </div>
+            </div>
+        </article>
+        {% endfor %}        
+        {% endfor %}        
+    </div>
+</div>
+{% else %}
+<h2 class="text-center m-5">No Post Available to Show!</h2>
+{% endif %}
+
+{% endblock main %}

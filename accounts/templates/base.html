@@ -8,6 +8,53 @@
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
+{% load static %}
+{% if user.is_authenticated %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        >
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:index' %}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:post-list' %}">All Posts</a>
+            </li>
+            {% if user.is_doctor %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:my-post' %}">My Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:create-post' %}">Create Post</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+</nav>
+{% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} text-center" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+{% endif %}
+
     <div class="container-fluid">
         {% block main %}
         {% endblock main %}
